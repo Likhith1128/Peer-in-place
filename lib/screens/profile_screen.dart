@@ -38,7 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final state = StateScope.of(context);
-    final user = state.currentUser!;
+    final user = state.currentUser;
+    if (user == null) return const SizedBox.shrink();
     final peer = user.peerId == null ? null : state.userById(user.peerId!);
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
@@ -76,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 12),
           OutlinedButton(
-            onPressed: state.signOut,
+            onPressed: () => leaveAndSignOut(context),
             child: const Text('Sign out'),
           ),
         ],

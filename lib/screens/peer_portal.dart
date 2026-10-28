@@ -83,7 +83,10 @@ class _Caseload extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Peer portal'),
         actions: [
-          TextButton(onPressed: state.signOut, child: const Text('Sign out')),
+          TextButton(
+            onPressed: () => leaveAndSignOut(context),
+            child: const Text('Sign out'),
+          ),
         ],
       ),
       body: ListView(

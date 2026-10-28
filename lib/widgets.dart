@@ -285,6 +285,12 @@ class OptionList extends StatelessWidget {
   }
 }
 
+void leaveAndSignOut(BuildContext context) {
+  final state = StateScope.of(context);
+  Navigator.of(context).popUntil((route) => route.isFirst);
+  state.signOut();
+}
+
 Future<void> showNotice(BuildContext context, String message) {
   return showDialog<void>(
     context: context,

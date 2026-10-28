@@ -20,7 +20,6 @@ class _AdminPortalState extends State<AdminPortal> {
 
   @override
   Widget build(BuildContext context) {
-    final state = StateScope.of(context);
     final pages = [
       const _Dashboard(),
       const _PeoplePage(peers: false),
@@ -38,7 +37,10 @@ class _AdminPortalState extends State<AdminPortal> {
               labelType: NavigationRailLabelType.all,
               leading: Padding(
                 padding: const EdgeInsets.only(top: 16, bottom: 8),
-                child: TextButton(onPressed: state.signOut, child: const Text('Sign out')),
+                child: TextButton(
+                  onPressed: () => leaveAndSignOut(context),
+                  child: const Text('Sign out'),
+                ),
               ),
               destinations: const [
                 NavigationRailDestination(
@@ -99,7 +101,10 @@ class _Dashboard extends StatelessWidget {
         title: const Text('Admin portal'),
         actions: [
           if (MediaQuery.sizeOf(context).width < 900)
-            TextButton(onPressed: state.signOut, child: const Text('Sign out')),
+            TextButton(
+              onPressed: () => leaveAndSignOut(context),
+              child: const Text('Sign out'),
+            ),
         ],
       ),
       body: ListView(

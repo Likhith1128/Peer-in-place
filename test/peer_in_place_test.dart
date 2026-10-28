@@ -97,6 +97,19 @@ void main() {
     expect(find.text('Great job'), findsOneWidget);
   });
 
+  testWidgets('signing out returns to the account screen', (tester) async {
+    await tester.pumpWidget(const PeerInPlaceApp());
+    await tester.ensureVisible(find.byKey(const Key('demo-participant')));
+    await tester.tap(find.byKey(const Key('demo-participant')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Profile'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Sign out'));
+    await tester.tap(find.text('Sign out'));
+    await tester.pumpAndSettle();
+    expect(find.text('Continue as participant'), findsOneWidget);
+  });
+
   testWidgets('admin directory lists participants', (tester) async {
     await tester.pumpWidget(const PeerInPlaceApp());
     await tester.ensureVisible(find.byKey(const Key('demo-admin')));
